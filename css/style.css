@@ -1,19 +1,81 @@
-.card-img-top{
-    width: 425px;
+@font-face {
+    font-family: 'Hemi Head';
+    src: url('fonts/hemi head bd it.ttf');
+    font-weight: normal;
+    font-style: normal;
 }
 
-@media only screen and (max-width: 700px) {
+h1{
+    font-size: 60px;
+    font-family: Hemi Head;
+}
+
+.bg {
+    background: url(images/shop-cube.jpg) repeat center center;
+    position: absolute;
+    width: 100%;
+    height: 200px; /*same height as jumbotron */
+    top:0;
+    left:0;
+    background-color: rgb(0,0,0); /* Fallback color */
+    z-index: -1;
+    filter: blur(2px);
+    -webkit-filter: blur(2px);
+}
+  
+.jumbotron {
+    margin-bottom: 0px;
+    height: 200px;
+    color: white;
+    text-shadow: black 0.1em 0.1em 0.1em;
+    background:transparent;
+}
+
+.gifs-appear-here{
+    align-content: flex-end;
+}
+
+.card-img-top{
+    width: 500px;
+}
+
+@media only screen and (max-width: 1025px) {
+    .card-img-top{
+        width: 425px;
+    }
+}
+@media only screen and (max-width: 875px) {
     .card-img-top{
         width: 350px;
     }
+    h1{
+        font-size: 50px;
+    }
 }
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 725px) {
     .card-img-top{
         width: 250px;
     }
+    .jumbotron {
+        height: 100px;
+    }
+    .bg {
+        height: 100px;
+    }
+    h1{
+        font-size: 40px;
+    }
+    .btn{
+        font-size: 14px;
+        margin: 5px;
+        padding: 5px;
+    }
+    .card-body{
+        padding: 5px;
+    }
 }
 @media only screen and (max-width: 300px) {
-    .card-img-top{
-        width: 150px;
+    h1{
+        font-size: 30px;
     }
 }

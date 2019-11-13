@@ -1,18 +1,19 @@
         var startButtons = ["Black Hole", "Space", "Final Fantasy", "Horizon Zero Dawn", "Miyazaki", "Altered Carbon", "3D", "Cats", "Ancient Greece", "Lord of the Rings"];
         var page = 0; //FOR PAGINATION
-        var currentTopic = "";
+        var currentTopic = ""; //TEMP FOR PAGINATION
         for (i = 0; i < startButtons.length; i++){
             $("#buttons-appear-here").append("<button class='btn btn-info gif-button' style='margin: 10px;' data-name='" + startButtons[i] + "'>" + startButtons[i] + "</button>");
         }
 
-        // * Adding buttons dynamically to the list of buttons based on what a user fills into a form
+        //Adding buttons dynamically to the list of buttons based on what a user fills into a form
         $("#add-button").on("click", function(event){
             event.preventDefault();
             var inputGif = $("#new-button").val().trim();
             console.log(inputGif);
             $("#buttons-appear-here").append("<button class='btn btn-info gif-button' style='margin: 10px;' data-name='" + inputGif + "'>" + inputGif + "</button>");
         });
-            
+         
+        //Function to save the data-name attribute to a temporary variable for pagination, then call fetchGifs with dataName
         $(document).on("click", ".gif-button", function() {
             var dataName = $(this).attr("data-name");
             currentTopic = dataName;
@@ -20,6 +21,7 @@
             fetchGifs(dataName);
         });
 
+        //Function that actually gets the gifs from the AJAX object
         function fetchGifs(dataName){
             var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + dataName + "&api_key=R8mbncGCeeAsgjOgcREdBP77Ar5lc6rh&limit=10&offset=" + (page); //PAGINATOR
             $.ajax({
@@ -42,12 +44,14 @@
                     var embedButton = $("<button class='btn btn-secondary button-embed' value='" + results[i].embed_url + "' style='margin-bottom:5px; margin-top:5px'>Copy Embed Link</button>");
                     // Set the image's src to results[i]'s fixed_height.url.
                     newImage.attr("src", results[i].images["480w_still"].url);
+                    //Append parts to newDiv
                     newDiv.append(p);
                     newDiv.append(newImage);
                     newDiv.append(cardBody);
+                    //Append parts to cardBody
                     cardBody.append(siteButton);
                     cardBody.append(embedButton);
-                    // Prepend the div to the element with an id of gifs-appear-here.
+                    // Prepend the whole to the element with an id of gifs-appear-here.
                     $("#gifs-appear-here").prepend(newDiv);
                 }
             });
