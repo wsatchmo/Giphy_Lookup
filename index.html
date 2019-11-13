@@ -6,6 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Giphy Lookup WebApp</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/style.css">
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -13,7 +14,7 @@
     <body>
         <form>
             <input id="new-button" type="text" style="height: 50px; width: 400px;">
-            <input id="add-button" class="btn btn-info" type="submit" value="Add Button">
+            <input id="add-button" class="btn btn-success" type="submit" value="Add Button">
         </form>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <div id="buttons-appear-here"></div>
@@ -47,14 +48,14 @@
                     // Make a div with jQuery and store it in a variable named newDiv.
                     var newDiv = $("<div class='card' style='float: left; margin: 15px 5px 15px 5px;'>");
                     // Make a paragraph tag with jQuery and store it in a variable named p.
-                    var p = $("<p class='card-text'>");
+                    var p = $("<p class='card-text text-center'>");
                     // Set the inner text of the paragraph to the rating of the image in results[i].
                     p.text("Rating: " + results[i].rating);
                     // Make an image tag with jQuery and store it in a variable named newImage.
-                    var newImage = $("<img class='card-img-top'>");
+                    var newImage = $("<img class='card-img-top' data-still='"+ results[i].images["480w_still"].url +"' data-animate='"+ results[i].images.fixed_height.url +"' data-state='still'>"); // PUT THIS STYLE INTO A CSS FILE
                     var newButton = $("<button class='btn btn-secondary button-url' value='" + results[i].url + "'>See on GIPHY</button>");
                     // Set the image's src to results[i]'s fixed_height.url.
-                    newImage.attr("src", results[i].images.fixed_height.url);
+                    newImage.attr("src", results[i].images["480w_still"].url);
                     newDiv.append(newImage);
                     newDiv.append(p);
                     newDiv.append(newButton);
@@ -71,9 +72,25 @@
             window.location = selectedVal;
         });
 
-        //THINGS YOU STILL NEED
-        // * Make it so gifs show up in random order or so that the next 10 gifs are shown
-        // * Ability to pause a gif
+        //ADD A FUNCTION TO COPY GIF URL
+
+        //function to pause gifs after hovering
+        $(document).on("mouseenter", ".card-img-top", function() {
+            console.log("hovered");
+            if ($(this).attr("data-state") === 'still'){
+            $(this).attr("src", $(this).attr('data-animate'));
+            $(this).attr("data-state", 'animate');
+            }
+        });
+        $(document).on("mouseleave", ".card-img-top", function(){
+            console.log("unhovered");
+            if ($(this).attr("data-state") === 'animate'){
+            $(this).attr("src", $(this).attr('data-still'));
+            $(this).attr("data-state", 'still');
+            }
+        });
+
+        //PAGINATION
 
         </script>
     </body>

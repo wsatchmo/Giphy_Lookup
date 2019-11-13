@@ -1,0 +1,19 @@
+.card-img-top{
+    width: 425px;
+}
+
+@media only screen and (max-width: 700px) {
+    .card-img-top{
+        width: 350px;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .card-img-top{
+        width: 250px;
+    }
+}
+@media only screen and (max-width: 300px) {
+    .card-img-top{
+        width: 150px;
+    }
+}
