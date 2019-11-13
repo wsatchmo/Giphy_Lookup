@@ -4,14 +4,14 @@
 
 A browser app for looking up gifs based on given topics utilizing the GIPHY API; fill in a search parameter, add it to the given search buttons, and click the new button to search. Hit the *Next Gifs In Topic* button to generate the next 10 gifs in the current topic.
 
-+++FEATURES+++
-###### * Dynamically generated gifs and buttons
-###### * Fully responsive layout
-###### * Button to visit GIPHY url
-###### * Button to copy embed link to clipboard
-###### * Hover over still image to play Gif
++++ FEATURES +++
+###### - Dynamically generated gifs and buttons
+###### - Fully responsive layout
+###### - Button to visit GIPHY url
+###### - Button to copy embed link to clipboard
+###### - Hover over still image to play Gif
 
-###NOTES###
+### NOTES ###
 If you are having trouble styling the dynamically generated content, it is probably because all of the styles are created inline with jQuery, like this -
 ```js
    var newDiv = $("<div class='card' style='float: left; margin: 15px 5px 15px 5px;'>");
