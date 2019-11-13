@@ -5,11 +5,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Giphy Lookup WebApp</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </head>
     <body>
         <form>
             <input id="new-button" type="text" style="height: 50px; width: 400px;">
-            <input id="add-button" type="submit" value="Add Button">
+            <input id="add-button" class="btn btn-info" type="submit" value="Add Button">
         </form>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <div id="buttons-appear-here"></div>
@@ -18,7 +22,7 @@
         <script type="text/javascript">
         var startButtons = ["Black Hole", "Space", "Final Fantasy", "Horizon Zero Dawn", "Miyazaki", "Altered Carbon", "3D", "Cats", "Ancient Greece", "Lord of the Rings"];
         for (i = 0; i < startButtons.length; i++){
-            $("#buttons-appear-here").append("<button data-name='" + startButtons[i] + "'>" + startButtons[i] + "</button>");
+            $("#buttons-appear-here").append("<button class='btn btn-info gif-button' style='margin: 10px;' data-name='" + startButtons[i] + "'>" + startButtons[i] + "</button>");
         }
 
         // * Adding buttons dynamically to the list of buttons based on what a user fills into a form
@@ -26,12 +30,10 @@
             event.preventDefault();
             var inputGif = $("#new-button").val().trim();
             console.log(inputGif);
-            $("#buttons-appear-here").append("<button data-name='" + inputGif + "'>" + inputGif + "</button>");
+            $("#buttons-appear-here").append("<button class='btn btn-info gif-button' data-name='" + inputGif + "'>" + inputGif + "</button>");
         });
             
-        
-
-        $(document).on("click", "button", function() {
+        $(document).on("click", ".gif-button", function() {
             var dataName = $(this).attr("data-name");
             var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + dataName + "&api_key=R8mbncGCeeAsgjOgcREdBP77Ar5lc6rh&limit=10";
             
@@ -43,31 +45,35 @@
                 var results = response.data;
                 for (var i = 0; i < results.length; i++) {
                     // Make a div with jQuery and store it in a variable named newDiv.
-                    var newDiv = $("<div style='float: left; margin: 15px 5px 15px 5px;'>");
+                    var newDiv = $("<div class='card' style='float: left; margin: 15px 5px 15px 5px;'>");
                     // Make a paragraph tag with jQuery and store it in a variable named p.
-                    var p = $("<p>");
+                    var p = $("<p class='card-text'>");
                     // Set the inner text of the paragraph to the rating of the image in results[i].
                     p.text("Rating: " + results[i].rating);
                     // Make an image tag with jQuery and store it in a variable named newImage.
-                    var newImage = $("<img>");
+                    var newImage = $("<img class='card-img-top'>");
+                    var newButton = $("<button class='btn btn-secondary button-url' value='" + results[i].url + "'>See on GIPHY</button>");
                     // Set the image's src to results[i]'s fixed_height.url.
                     newImage.attr("src", results[i].images.fixed_height.url);
-                    // Append the p variable to the newDiv variable.
-                    newDiv.append(p);
-                    // Append to the newDiv variable.
                     newDiv.append(newImage);
+                    newDiv.append(p);
+                    newDiv.append(newButton);
                     // Prepend the div to the element with an id of gifs-appear-here.
                     $("#gifs-appear-here").prepend(newDiv);
                 }
             });
         });
 
-
+        //function to visit the gifs site on GIPHY on click
+        $(document).on("click", '.button-url', function() {
+            var selectedVal = $(this).val();
+            console.log(selectedVal);
+            window.location = selectedVal;
+        });
 
         //THINGS YOU STILL NEED
         // * Make it so gifs show up in random order or so that the next 10 gifs are shown
         // * Ability to pause a gif
-        // * Add a button that is 'click to copy gif url'
 
         </script>
     </body>
