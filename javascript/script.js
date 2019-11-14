@@ -23,7 +23,7 @@
 
         //Function that actually gets the gifs from the AJAX object
         function fetchGifs(dataName){
-            var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + dataName + "&api_key=R8mbncGCeeAsgjOgcREdBP77Ar5lc6rh&limit=10&offset=" + (page); //PAGINATOR
+            var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + dataName + "&api_key=R8mbncGCeeAsgjOgcREdBP77Ar5lc6rh&limit=10&offset=" + (page * 10); //PAGINATOR
             $.ajax({
                 url: queryURL,
                 method: "GET"
