@@ -1,4 +1,4 @@
-        var startButtons = ["Black Hole", "Space", "Final Fantasy", "Horizon Zero Dawn", "Miyazaki", "Altered Carbon", "3D", "Cats", "Ancient Greece", "Lord of the Rings"];
+        var startButtons = ["Black Hole", "Space", "Final Fantasy", "Horizon Zero Dawn", "Miyazaki", "Altered Carbon", "3D", "Cats", "Ancient Greece", "Lord of the Rings", "Always Sunny"];
         var page = 0; //FOR PAGINATION
         var currentTopic = ""; //TEMP FOR PAGINATION
         for (i = 0; i < startButtons.length; i++){
