@@ -9,8 +9,11 @@ for (i = 0; i < startButtons.length; i++){
 $("#add-button").on("click", function(event){
     event.preventDefault();
     var inputGif = $("#new-button").val().trim();
-    console.log(inputGif);
-    $("#buttons-appear-here").append("<button class='btn btn-info gif-button' style='margin: 10px;' data-name='" + inputGif + "'>" + inputGif + "</button>");
+    if (inputGif !== ""){
+        console.log(inputGif);
+        $("#buttons-appear-here").append("<button class='btn btn-info gif-button' style='margin: 10px;' data-name='" + inputGif + "'>" + inputGif + "</button>");
+        $("#new-button").val("");
+    }
 });
     
 //Function to save the data-name attribute to a temporary variable for pagination, then call fetchGifs with dataName
